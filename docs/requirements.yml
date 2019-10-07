@@ -1,0 +1,9 @@
+name: seg_requirements
+dependencies:
+- python3
+- cuda 9.0
+- pip:
+  - Image
+  - tqdm
+  - torch 1.1.0
+  - torchvision 0.3.0
