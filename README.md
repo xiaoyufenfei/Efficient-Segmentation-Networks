@@ -3,10 +3,9 @@
 [![pytorch-image]][pytorch-url]
 [![lic-image]][lic-url]
 
-This project aims at providing a easy-to-use, modifiable reference implementation for real-time semantic segmentation models using PyTorch.
+This project aims at providing an easy-to-use, modifiable reference implementation for real-time semantic segmentation models using PyTorch.
 
 <p align="center"><img width="100%" src="docs/image-1.png" /></p>
-
 
 ### Support
 
