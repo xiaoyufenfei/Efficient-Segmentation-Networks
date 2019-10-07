@@ -19,7 +19,7 @@ This project aims at providing a easy-to-use, modifiable reference implementatio
 - [ESPNet](https://arxiv.org/pdf/1803.06815v2.pdf)
 - [LEDNet](https://arxiv.org/pdf/1905.02423v3.pdf)
 - [ESNet](https://arxiv.org/pdf/1906.09826v1.pdf)
-- [CCNet](https://arxiv.org/pdf/1811.08201.pdf)
+- [CGNet](https://arxiv.org/pdf/1811.08201.pdf)
 - [DABNet](https://arxiv.org/pdf/1907.11357.pdf)
 - [Fast-SCNN](https://arxiv.org/pdf/1902.04502.pdf)
 - [ContextNet](https://arxiv.org/pdf/1805.04554.pdf)
