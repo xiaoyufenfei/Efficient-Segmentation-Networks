@@ -6,7 +6,6 @@
 This project aims at providing an easy-to-use, modifiable reference implementation for real-time semantic segmentation models using PyTorch.
 
 <p align="center"><img width="100%" src="docs/image-1.png" /></p>
-
 ### Support
 
 #### Model
@@ -20,6 +19,7 @@ This project aims at providing an easy-to-use, modifiable reference implementati
 - [ESPNet](https://arxiv.org/pdf/1803.06815v2.pdf)
 - [LEDNet](https://arxiv.org/pdf/1905.02423v3.pdf)
 - [ESNet](https://arxiv.org/pdf/1906.09826v1.pdf)
+- [FSSNet](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8392426)
 - [CGNet](https://arxiv.org/pdf/1811.08201.pdf)
 - [DABNet](https://arxiv.org/pdf/1907.11357.pdf)
 - [Fast-SCNN](https://arxiv.org/pdf/1902.04502.pdf)
