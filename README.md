@@ -6,6 +6,7 @@
 This project aims at providing an easy-to-use, modifiable reference implementation for real-time semantic segmentation models using PyTorch.
 
 <p align="center"><img width="100%" src="docs/image-1.png" /></p>
+
 ### Support
 
 #### Model
@@ -24,6 +25,9 @@ This project aims at providing an easy-to-use, modifiable reference implementati
 - [DABNet](https://arxiv.org/pdf/1907.11357.pdf)
 - [Fast-SCNN](https://arxiv.org/pdf/1902.04502.pdf)
 - [ContextNet](https://arxiv.org/pdf/1805.04554.pdf)
+- [FPENet](https://arxiv.org/pdf/1909.08599v1.pdf)
+
+
 
 
 
