@@ -5,7 +5,7 @@
 This project aims at providing an easy-to-use, modifiable reference implementation for real-time semantic segmentation models using PyTorch.
 
 <p align="center"><img width="100%" src="docs/image-1.png" /></p>
-< / b r >
+
 ### Support
 
 #### Model
