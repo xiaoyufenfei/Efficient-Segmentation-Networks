@@ -1,12 +1,10 @@
 # Efficient-Segmentation-Networks
 [![python-image]][python-url]
 [![pytorch-image]][pytorch-url]
-[![lic-image]][lic-url]
 
 This project aims at providing an easy-to-use, modifiable reference implementation for real-time semantic segmentation models using PyTorch.
 
 <p align="center"><img width="100%" src="docs/image-1.png" /></p>
-
 ### Support
 
 #### Model
@@ -57,8 +55,7 @@ This project aims at providing an easy-to-use, modifiable reference implementati
 [python-url]: https://www.python.org/
 [pytorch-image]: https://img.shields.io/badge/PyTorch-1.1-2BAF2B.svg
 [pytorch-url]: https://pytorch.org/
-[lic-image]: https://img.shields.io/aur/license/pac.svg
-[lic-url]: https://github.com/xiaoyufenfei/Efficient-Segmentation-Networks/blob/master/LICENSE
+
 
 
 
