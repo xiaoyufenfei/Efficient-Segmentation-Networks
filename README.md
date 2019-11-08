@@ -7,9 +7,6 @@ This project aims at providing an easy-to-use, modifiable reference implementati
 <p align="center"><img width="100%" src="docs/image-1.png" /></p>
 ---
 
----
-
-
 #### Model
 The project supports these semantic segmentation models as follows:
 - [SQNet](https://openreview.net/pdf?id=S1uHiFyyg)
@@ -130,7 +127,7 @@ Currently, the code supports [Python 3](https://www.python.org/)
 If you think this work useful, please give me a star! And if you find any errors or have any suggestions, please contact me.
 
 **GitHub:** `xiaoyufenfei`
- **Email:** `wangy314159@163.com`
+**Email:** `wangy314159@163.com`
 
 
 
