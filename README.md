@@ -7,7 +7,7 @@ This project aims at providing an easy-to-use, modifiable reference implementati
 <p align="center"><img width="100%" src="docs/image-1.png" /></p>
 ---
 
-#### Requirements
+### Requirements
 
  [**PyTorch**](https://pytorch.org/) and [**Torchvision**](https://pytorch.org/) needs to be installed before running the scripts,  PyTorch v1.1 or later is supported. 
 
@@ -15,7 +15,7 @@ This project aims at providing an easy-to-use, modifiable reference implementati
 pip3 install -r requirements.txt
 ```
 
-#### Model
+### Models
 
 The project supports these semantic segmentation models as follows:
 - (**SQNet**) Speeding up Semantic Segmentation for Autonomous Driving [[Paper]](https://openreview.net/pdf?id=S1uHiFyyg)
@@ -37,7 +37,7 @@ The project supports these semantic segmentation models as follows:
 - (**FPENet**) Feature Pyramid Encoding Network for Real-time Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1909.08599v1.pdf)
 - ...
 
-#### Losses
+### Losses
 
  The project supports these loss functions: 
 
@@ -48,7 +48,7 @@ The project supports these semantic segmentation models as follows:
 > 5. LovaszSoftmax
 > 6. ...
 
-#### Optimizers
+### Optimizers
 
  The project supports these optimizers: 
 
@@ -59,7 +59,7 @@ The project supports these semantic segmentation models as follows:
 > 5. RAdam + Lookahead
 > 6. ...
 
-#### Activations
+### Activations
 
 > 1. ReLu
 > 2. PReLU
@@ -68,7 +68,7 @@ The project supports these semantic segmentation models as follows:
 > 5. [Mish](https://github.com/digantamisra98/Mish) : A Self Regularized Non-Monotonic Neural Activation Function
 > 6. ...
 
-#### Learning Rate Scheduler
+### Learning Rate Scheduler
 
 The project supports these LR_Schedulers: 
 
@@ -76,14 +76,14 @@ The project supports these LR_Schedulers:
 > 2. Warm up 
 > 3. ...
 
-#### Some useful Tools
+### Some useful Tools
 
 > 1. [pytorch-OpCounter](https://github.com/Lyken17/pytorch-OpCounter)
 > 2. [flops-counter.pytorch](https://github.com/sovrasov/flops-counter.pytorch) 
 > 3. [Netron](https://github.com/lutzroeder/Netron) : Visualizer for neural network models, On line URL: [Netron](https://lutzroeder.github.io/netron/)
 > 4. ...
 
-#### Dataset Setting
+### Dataset Setting
 
 This project has been tailored to suit the [Cityscapes](https://www.cityscapes-dataset.com/) and  [Camvid](http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/)  datasets. The folds of your dataset need satisfy the following structures: 
 
@@ -109,7 +109,7 @@ This project has been tailored to suit the [Cityscapes](https://www.cityscapes-d
 |  |  |-- ...
 ```
 
-#### Usage
+### Usage
 
 ##### Clone this Repo
 
@@ -131,14 +131,14 @@ Currently, the code supports [Python 3](https://www.python.org/)
 
 ##### Evaluating
 
-#### Contact
+### Contact
 
 If you think this work useful, please give me a star! And if you find any errors or have any suggestions, please contact me.
 
 **GitHub:** `xiaoyufenfei`
 **Email:** `wangy314159@163.com`
 
-#### Refer to this Rep
+### Refer to this Rep
 
 ```bash
 @misc{Efficient-Segmentation-Networks,
