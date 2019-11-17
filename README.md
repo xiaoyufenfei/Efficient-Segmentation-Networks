@@ -7,33 +7,42 @@ This project aims at providing an easy-to-use, modifiable reference implementati
 <p align="center"><img width="100%" src="docs/image-1.png" /></p>
 ---
 
+#### Requirements
+
+ [**PyTorch**](https://pytorch.org/) and [**Torchvision**](https://pytorch.org/) needs to be installed before running the scripts,  PyTorch v1.1 or later is supported. 
+
+```bash
+pip3 install -r requirements.txt
+```
+
 #### Model
+
 The project supports these semantic segmentation models as follows:
-- [SQNet](https://openreview.net/pdf?id=S1uHiFyyg)
-- [LinkNet](https://arxiv.org/pdf/1707.03718.pdf)
-- [SegNet](https://arxiv.org/pdf/1511.00561.pdf)
-- [UNet](https://arxiv.org/pdf/1505.04597.pdf)
-- [ENet](https://arxiv.org/pdf/1606.02147.pdf)
-- [ERFNet](http://www.robesafe.uah.es/personal/eduardo.romera/pdfs/Romera17iv.pdf)
-- [EDANet](https://arxiv.org/ftp/arxiv/papers/1809/1809.06323.pdf)
-- [ESPNet](https://arxiv.org/pdf/1803.06815v2.pdf)
-- [ESPNetv2](https://arxiv.org/pdf/1811.11431.pdf)
-- [LEDNet](https://arxiv.org/pdf/1905.02423v3.pdf)
-- [ESNet](https://arxiv.org/pdf/1906.09826v1.pdf)
-- [FSSNet](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8392426)
-- [CGNet](https://arxiv.org/pdf/1811.08201.pdf)
-- [DABNet](https://arxiv.org/pdf/1907.11357.pdf)
-- [Fast-SCNN](https://arxiv.org/pdf/1902.04502.pdf)
-- [ContextNet](https://arxiv.org/pdf/1805.04554.pdf)
-- [FPENet](https://arxiv.org/pdf/1909.08599v1.pdf)
+- (**SQNet**) Speeding up Semantic Segmentation for Autonomous Driving [[Paper]](https://openreview.net/pdf?id=S1uHiFyyg)
+- (**LinkNet**)  Exploiting Encoder Representations for Efficient Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1707.03718.pdf)
+- (**SegNet**)  A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation [[Paper]](https://arxiv.org/pdf/1511.00561.pdf)
+- (**UNet**)  Convolutional Networks for Biomedical Image Segmentation [[Paper]](https://arxiv.org/pdf/1505.04597.pdf)
+- (**ENet**)  A Deep Neural Network Architecture for Real-Time Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1606.02147.pdf)
+- (**ERFNet**)  Efficient ConvNet for Real-time Semantic Segmentation [[Paper]](http://www.robesafe.uah.es/personal/eduardo.romera/pdfs/Romera17iv.pdf)
+- (**EDANet**)  Efficient Dense Modules of Asymmetric Convolution for Real-Time Segmentation [[Paper]](https://arxiv.org/ftp/arxiv/papers/1809/1809.06323.pdf)
+- (**ESPNet**)  Efficient Spatial Pyramid of Dilated  Convolutions for Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1803.06815v2.pdf)
+- (**ESPNetv2**)  A Light-weight, Power Efficient, and General Purpose ConvNet [[Paper]](https://arxiv.org/pdf/1811.11431.pdf)
+- (**LEDNet**)  A Lightweight Encoder-Decoder Network for Real-Time Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1905.02423v3.pdf)
+- (**FSSNet**)  Fast Semantic Segmentation for Scene Perception [[Paper]](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8392426)
+- (**ESNet**)  An Efficient Symmetric Network for Real-time Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1906.09826v1.pdf)
+- (**CGNet**)  A Light-weight Context Guided Network for Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1811.08201.pdf)
+- (**Fast-SCNN**)  Fast Semantic Segmentation Network [[Paper]](https://arxiv.org/pdf/1902.04502.pdf)
+- (**DABNet**)  Depth-wise Asymmetric Bottleneck for Real-time Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1907.11357.pdf)
+- (**ContextNet**)  Exploring Context and Detail  for Semantic Segmentation in Real-time [[Paper]](https://arxiv.org/pdf/1805.04554.pdf)
+- (**FPENet**) Feature Pyramid Encoding Network for Real-time Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1909.08599v1.pdf)
 - ...
 
 #### Losses
 
  The project supports these loss functions: 
 
-> 1. Cross Entropy
-> 2. Cross Entropy with Label Smooth
+> 1. Weighted Cross Entropy
+> 2. Weighted Cross Entropy with Label Smooth
 > 3. Focal Loss
 > 4. Ohem Cross Entropy
 > 5. LovaszSoftmax
@@ -128,6 +137,20 @@ If you think this work useful, please give me a star! And if you find any errors
 
 **GitHub:** `xiaoyufenfei`
 **Email:** `wangy314159@163.com`
+
+#### Refer to this Rep
+
+```bash
+@misc{Efficient-Segmentation-Networks,
+  author = {Yu Wang},
+  title = {Efficient-Segmentation-Networks Pytorch Implementation},
+  year = {2019},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/xiaoyufenfei/Efficient-Segmentation-Networks}},
+  commit = {master}
+}
+```
 
 
 
