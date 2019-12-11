@@ -45,8 +45,9 @@ The project supports these semantic segmentation models as follows:
 > 2. Weighted Cross Entropy with Label Smooth
 > 3. Focal Loss
 > 4. Ohem Cross Entropy
-> 5. LovaszSoftmax
-> 6. ...
+> 5. [LovaszSoftmax](https://github.com/bermanmaxim/LovaszSoftmax)
+> 6. [SegLoss-List](https://github.com/JunMa11/SegLoss)
+> 7. ...
 
 ### Optimizers
 
@@ -55,7 +56,7 @@ The project supports these semantic segmentation models as follows:
 > 1. SGD
 > 2. Adam 
 > 3. AdamW 
-> 4. RAdam
+> 4. [RAdam](https://github.com/LiyuanLucasLiu/RAdam)
 > 5. RAdam + Lookahead
 > 6. ...
 
@@ -73,7 +74,20 @@ The project supports these semantic segmentation models as follows:
 The project supports these LR_Schedulers: 
 
 > 1. Poly decay
-> 2. Warm up 
+> 2. Warmup Poly  
+> 3. ...
+
+### Normalization methods
+
+> 1. [In-Place Activated BatchNorm](https://github.com/mapillary/inplace_abn)
+> 2. [Switchable Normalization](https://github.com/switchablenorms/Switchable-Normalization)
+> 3. [Weight Standardization](https://github.com/joe-siyuan-qiao/WeightStandardization)
+> 4. ...
+
+## Enhancing Semantic Feature Learning Method
+
+> 1. [Attention Family](https://github.com/implus/PytorchInsight)
+> 2. [NAS Family](https://github.com/D-X-Y/NAS-Projects)
 > 3. ...
 
 ### Some useful Tools
@@ -81,7 +95,9 @@ The project supports these LR_Schedulers:
 > 1. [pytorch-OpCounter](https://github.com/Lyken17/pytorch-OpCounter)
 > 2. [flops-counter.pytorch](https://github.com/sovrasov/flops-counter.pytorch) 
 > 3. [Netron](https://github.com/lutzroeder/Netron) : Visualizer for neural network models, On line URL: [Netron](https://lutzroeder.github.io/netron/)
-> 4. ...
+> 4. [Falshtorch](https://github.com/MisaOgura/flashtorch): Visualization toolkit for neural networks in PyTorch !
+> 5. [Bag of Tricks for Image Classification with Convolutional Neural Networks](https://github.com/weiaicunzai/Bag_of_Tricks_for_Image_Classification_with_Convolutional_Neural_Networks)
+> 6. ...
 
 ### Dataset Setting
 
@@ -120,8 +136,16 @@ cd Efficient-Segmentation-Networks
 
 Currently, the code supports [Python 3](https://www.python.org/)
 
+ Torch dependencies: 
+
 - [PyTorch](https://pytorch.org/) (>=1.1.0)
 - torchvision(>=0.3.0)
+
+Data dependencies:
+
+- [Cityscapes](https://www.cityscapes-dataset.com/) + [scripts](https://github.com/mcordts/cityscapesScripts)
+
+Download Cityscapes and run the script `createTrainIdLabelImgs.py` to create annotations based on the training labels. Make sure that the folder is named *cityscapes*
 
 ##### Training
 
@@ -139,6 +163,8 @@ If you think this work useful, please give me a star! And if you find any errors
 **Email:** `wangy314159@163.com`
 
 ### Refer to this Rep
+
+You are encouraged to cite the following papers if this work helps your research.
 
 ```bash
 @misc{Efficient-Segmentation-Networks,
