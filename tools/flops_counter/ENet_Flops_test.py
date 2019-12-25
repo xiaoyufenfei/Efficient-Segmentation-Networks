@@ -3,13 +3,13 @@ import argparse
 import torch
 
 
-from model.ENet.ENet import ENet
+from model.ENet import ENet
 from model.ERFNet import ERFNet
 from model.CGNet import CGNet
 from model.EDANet import EDANet
 from model.ESNet import ESNet
 from model.ESPNet import ESPNet
-from model.LEDNet.LEDNet_2 import LEDNet
+from model.LEDNet import LEDNet
 from model.ESPNet_v2.SegmentationModel import EESPNet_Seg
 from model.FastSCNN import FastSCNN
 from model.DABNet import DABNet
