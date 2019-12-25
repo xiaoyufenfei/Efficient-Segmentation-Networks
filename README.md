@@ -7,6 +7,14 @@ This project aims at providing an easy-to-use, modifiable reference implementati
 <p align="center"><img width="100%" src="docs/image-1.png" /></p>
 ---
 
+### Table of Contents:
+- <a href='#Requirements'>Requirements</a>
+- <a href='#Models'>Models</a>
+- <a href='#Dataset Setting'>Dataset Setting</a>
+- <a href='#Usage'>Usage</a>
+- <a href='#Contact'>Contact</a>
+- <a href='#Refer to this Rep'>Citation</a>
+
 ### Requirements
 
  [**PyTorch**](https://pytorch.org/) and [**Torchvision**](https://pytorch.org/) needs to be installed before running the scripts,  PyTorch v1.1 or later is supported. 
@@ -37,7 +45,7 @@ The project supports these semantic segmentation models as follows:
 - (**FPENet**) Feature Pyramid Encoding Network for Real-time Semantic Segmentation [[Paper]](https://arxiv.org/pdf/1909.08599v1.pdf)
 - ...
 
-### Losses
+#### Losses
 
  The project supports these loss functions: 
 
@@ -49,7 +57,7 @@ The project supports these semantic segmentation models as follows:
 > 6. [SegLoss-List](https://github.com/JunMa11/SegLoss)
 > 7. ...
 
-### Optimizers
+#### Optimizers
 
  The project supports these optimizers: 
 
@@ -60,7 +68,7 @@ The project supports these semantic segmentation models as follows:
 > 5. RAdam + Lookahead
 > 6. ...
 
-### Activations
+#### Activations
 
 > 1. ReLu
 > 2. PReLU
@@ -69,7 +77,7 @@ The project supports these semantic segmentation models as follows:
 > 5. [Mish](https://github.com/digantamisra98/Mish) : A Self Regularized Non-Monotonic Neural Activation Function
 > 6. ...
 
-### Learning Rate Scheduler
+#### Learning Rate Scheduler
 
 The project supports these LR_Schedulers: 
 
@@ -77,20 +85,20 @@ The project supports these LR_Schedulers:
 > 2. Warmup Poly  
 > 3. ...
 
-### Normalization methods
+#### Normalization methods
 
 > 1. [In-Place Activated BatchNorm](https://github.com/mapillary/inplace_abn)
 > 2. [Switchable Normalization](https://github.com/switchablenorms/Switchable-Normalization)
 > 3. [Weight Standardization](https://github.com/joe-siyuan-qiao/WeightStandardization)
 > 4. ...
 
-## Enhancing Semantic Feature Learning Method
+#### Enhancing Semantic Feature Learning Method
 
 > 1. [Attention Family](https://github.com/implus/PytorchInsight)
 > 2. [NAS Family](https://github.com/D-X-Y/NAS-Projects)
 > 3. ...
 
-### Some useful Tools
+#### Some useful Tools
 
 > 1. [pytorch-OpCounter](https://github.com/Lyken17/pytorch-OpCounter)
 > 2. [flops-counter.pytorch](https://github.com/sovrasov/flops-counter.pytorch) 
@@ -101,7 +109,7 @@ The project supports these LR_Schedulers:
 
 ### Dataset Setting
 
-This project has been tailored to suit the [Cityscapes](https://www.cityscapes-dataset.com/) and  [Camvid](http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/)  datasets. The folds of your dataset need satisfy the following structures: 
+This project has been tailored to suit the [Cityscapes](https://www.cityscapes-dataset.com/) and  [CamVid](http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/)  datasets. The folds of your dataset need satisfy the following structures: 
 
 ```
 |-- dataset
@@ -125,9 +133,13 @@ This project has been tailored to suit the [Cityscapes](https://www.cityscapes-d
 |  |  |-- ...
 ```
 
+- You can download [**cityscapes**](https://www.cityscapes-dataset.com/)  dataset from [here](https://www.cityscapes-dataset.com/downloads/). Note: please download [leftImg8bit_trainvaltest.zip(11GB)](https://www.cityscapes-dataset.com/file-handling/?packageID=4) and [gtFine_trainvaltest(241MB)](https://www.cityscapes-dataset.com/file-handling/?packageID=1).
+- You can download [**camvid**](http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/) dataset from [here](https://github.com/alexgkendall/SegNet-Tutorial/tree/master/CamVid).
+- The **Cityscapes dataset scripts** for inspection, preparation, and evaluation can download from [here](https://github.com/mcordts/cityscapesScripts).
+
 ### Usage
 
-##### Clone this Repo
+#### Clone this Repo
 
 ```
 git clone https://github.com/xiaoyufenfei/Efficient-Segmentation-Networks
@@ -148,12 +160,41 @@ Data dependencies:
 Download Cityscapes and run the script `createTrainIdLabelImgs.py` to create annotations based on the training labels. Make sure that the folder is named *cityscapes*
 
 ##### Training
+- For Cityscapes / CamVid
+
+1. training on **train** set
+
+```
+python train.py  --help
+```
+
+2. training on **train+val** set
+
+```
+python train.py --help
+```
 
 ##### Testing
+- For Cityscapes / CamVid
+
+```
+python test.py --help
+```
 
 ##### Predicting
+- For Cityscapes
+
+```
+python predict.py --help
+```
 
 ##### Evaluating
+- For Cityscapes
+
+```
+cd tools
+python trainID2labelID.py 
+```
 
 ### Contact
 
@@ -178,6 +219,9 @@ You are encouraged to cite the following papers if this work helps your research
 }
 ```
 
+### License
+
+This project is released under the MIT License. See [LICENSE](https://github.com/xiaoyufenfei/Efficient-Segmentation-Networks/blob/master/LICENSE) for additional details.
 
 
 

@@ -8,12 +8,24 @@
 |    UNet    |    ✓    |          |          |           |
 |    ENet    |    ✓    |          |          |           |
 |   ERFNet   |    ✓    |          |          |           |
+|   CGNet    |    ✓    |          |          |           |
 |   EDANet   |    ✓    |          |          |           |
 |   ESPNet   |    ✓    |          |          |           |
-|   LEDNet   |    ✓    |          |          |           |
 |   ESNet    |    ✓    |          |          |           |
-|   CGNet    |    ✓    |          |          |           |
-|   DABNet   |    ✓    |          |          |           |
-| Fast-SCNN  |    ✓    |          |          |           |
+|  ESPNetv2  |    ✓    |          |          |           |
+|   LEDNet   |    ✓    |          |          |           |
 | ContextNet |    ✓    |          |          |           |
-|   CANet    |    ✓    |          |          |           |
+| Fast-SCNN  |    ✓    |          |          |           |
+|   DABNet   |    ✓    |          |          |           |
+|   FSSNet   |    ✓    |          |          |           |
+|   FPENet   |    ✓    |          |          |           |
+|            |         |          |          |           |
+
+
+
+
+
+
+
+
+
