@@ -10,10 +10,9 @@ This project aims at providing an easy-to-use, modifiable reference implementati
 ### Table of Contents:
 - <a href='#Requirements'>Requirements</a>
 - <a href='#Models'>Models</a>
-- <a href='#Dataset Setting'>Dataset Setting</a>
+- <a href='#Dataset-Setting'>Dataset Setting</a>
 - <a href='#Usage'>Usage</a>
 - <a href='#Contact'>Contact</a>
-- <a href='#Refer to this Rep'>Citation</a>
 
 ### Requirements
 
@@ -107,7 +106,7 @@ The project supports these LR_Schedulers:
 > 5. [Bag of Tricks for Image Classification with Convolutional Neural Networks](https://github.com/weiaicunzai/Bag_of_Tricks_for_Image_Classification_with_Convolutional_Neural_Networks)
 > 6. ...
 
-### Dataset Setting
+### Dataset-Setting
 
 This project has been tailored to suit the [Cityscapes](https://www.cityscapes-dataset.com/) and  [CamVid](http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/)  datasets. The folds of your dataset need satisfy the following structures: 
 
