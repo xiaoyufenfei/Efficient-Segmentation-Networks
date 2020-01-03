@@ -6,7 +6,9 @@ import torch.nn as nn
 import timeit
 import math
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
 import torch.backends.cudnn as cudnn
 from argparse import ArgumentParser
 # user
