@@ -14,19 +14,19 @@ from utils.convert_state import convert_state_dict
 
 def parse_args():
     parser = ArgumentParser(description='Efficient semantic segmentation')
-    parser.add_argument('--model', default="ENet", help="model name: (default ENet)")
-    parser.add_argument('--dataset', default="camvid", help="dataset: cityscapes or camvid")
+    parser.add_argument('--model', default="ESNet", help="model name:ESPNet_v2 (default ENet)")
+    parser.add_argument('--dataset', default="cityscapes", help="dataset: cityscapes or camvid")
     parser.add_argument('--num_workers', type=int, default=1, help="the number of parallel threads")
     parser.add_argument('--batch_size', type=int, default=1,
                         help=" the batch_size is set to 1 when evaluating or testing")
-    parser.add_argument('--checkpoint', type=str,default="",
+    parser.add_argument('--checkpoint', type=str,default="./checkpoint/cityscapes/ESNetbs12gpu2_trainval/model_1_0.03.pth",
                         help="use the file to load the checkpoint for evaluating or testing ")
     parser.add_argument('--save_seg_dir', type=str, default="./result/",
                         help="saving path of prediction result")
     parser.add_argument('--best', action='store_true', help="Get the best result among last few checkpoints")
-    parser.add_argument('--save', action='store_true', help="Save the predicted image")
+    parser.add_argument('--save', action='store_true', default= True, help="Save the predicted image")
     parser.add_argument('--cuda', default=True, help="run on CPU or GPU")
-    parser.add_argument("--gpus", default="0", type=str, help="gpu ids (default: 0)")
+    parser.add_argument("--gpus", default="3, 4", type=str, help="gpu ids (default: 0)")
     args = parser.parse_args()
 
     return args
@@ -102,8 +102,8 @@ def test_model(args):
             if os.path.isfile(args.checkpoint):
                 print("=====> loading checkpoint '{}'".format(args.checkpoint))
                 checkpoint = torch.load(args.checkpoint)
-                model.load_state_dict(checkpoint['model'])
-                # model.load_state_dict(convert_state_dict(checkpoint['model']))
+                # model.load_state_dict(checkpoint['model'])
+                model.load_state_dict(convert_state_dict(checkpoint['model']))
             else:
                 print("=====> no checkpoint found at '{}'".format(args.checkpoint))
                 raise FileNotFoundError("no checkpoint found at '{}'".format(args.checkpoint))

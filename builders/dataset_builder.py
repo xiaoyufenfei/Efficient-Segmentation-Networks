@@ -6,34 +6,25 @@ from dataset.camvid import CamVidDataSet, CamVidValDataSet, CamVidTrainInform, C
 
 
 def build_dataset_train(dataset, input_size, batch_size, train_type, random_scale, random_mirror, num_workers):
-    data_dir = os.path.join('./dataset/', dataset)
+    data_dir = os.path.join('/media/sdb/datasets/segment/', dataset)
     dataset_list = os.path.join(dataset, '_trainval_list.txt')
     train_data_list = os.path.join(data_dir, dataset + '_' + train_type + '_list.txt')
     val_data_list = os.path.join(data_dir, dataset + '_val' + '_list.txt')
     inform_data_file = os.path.join('./dataset/inform/', dataset + '_inform.pkl')
 
-    # inform_data_file collect the information of mean, std and weigth_class
-    if not os.path.isfile(inform_data_file):
-        print("%s is not found" % (inform_data_file))
-        if dataset == "cityscapes":
-            dataCollect = CityscapesTrainInform(data_dir, 19, train_set_file=dataset_list,
-                                                inform_data_file=inform_data_file)
-        elif dataset == 'camvid':
-            dataCollect = CamVidTrainInform(data_dir, 11, train_set_file=dataset_list,
-                                            inform_data_file=inform_data_file)
-        else:
-            raise NotImplementedError(
-                "This repository now supports two datasets: cityscapes and camvid, %s is not included" % dataset)
-
-        datas = dataCollect.collectDataAndSave()
-        if datas is None:
-            print("error while pickling data. Please check.")
-            exit(-1)
-    else:
-        print("find file: ", str(inform_data_file))
-        datas = pickle.load(open(inform_data_file, "rb"))
-
     if dataset == "cityscapes":
+        # inform_data_file collect the information of mean, std and weigth_class
+        if not os.path.isfile(inform_data_file):
+            print("%s is not found" % (inform_data_file))
+            dataCollect = CityscapesTrainInform(data_dir, 19, train_set_file=dataset_list,
+                                                    inform_data_file=inform_data_file)
+            datas = dataCollect.collectDataAndSave()
+            if datas is None:
+                print("error while pickling data. Please check.")
+                exit(-1)
+        else:
+            print("find file: ", str(inform_data_file))
+            datas = pickle.load(open(inform_data_file, "rb"))
 
         trainLoader = data.DataLoader(
             CityscapesDataSet(data_dir, train_data_list, crop_size=input_size, scale=random_scale,
@@ -49,6 +40,17 @@ def build_dataset_train(dataset, input_size, batch_size, train_type, random_scal
         return datas, trainLoader, valLoader
 
     elif dataset == "camvid":
+        # inform_data_file collect the information of mean, std and weigth_class
+        if not os.path.isfile(inform_data_file):
+            print("%s is not found" % (inform_data_file))
+            dataCollect = CamVidTrainInform(data_dir, 11, train_set_file=dataset_list, inform_data_file=inform_data_file)
+            datas = dataCollect.collectDataAndSave()
+            if datas is None:
+                print("error while pickling data. Please check.")
+                exit(-1)
+        else:
+            print("find file: ", str(inform_data_file))
+            datas = pickle.load(open(inform_data_file, "rb"))
 
         trainLoader = data.DataLoader(
             CamVidDataSet(data_dir, train_data_list, crop_size=input_size, scale=random_scale,
@@ -61,10 +63,16 @@ def build_dataset_train(dataset, input_size, batch_size, train_type, random_scal
             batch_size=1, shuffle=True, num_workers=num_workers, pin_memory=True)
 
         return datas, trainLoader, valLoader
+    elif dataset == "ade20k":
+        raise NotImplementedError(
+            " ade20k is not supported now")
+    else:
+        raise NotImplementedError(
+            "This repository now supports datasets: cityscapes, camvid and ade20k, %s is not included" % dataset)
 
 
 def build_dataset_test(dataset, num_workers, none_gt=False):
-    data_dir = os.path.join('./dataset/', dataset)
+    data_dir = os.path.join('/media/sdb/datasets/segment/', dataset)
     dataset_list = os.path.join(dataset, '_trainval_list.txt')
     test_data_list = os.path.join(data_dir, dataset + '_test' + '_list.txt')
     inform_data_file = os.path.join('./dataset/inform/', dataset + '_inform.pkl')
@@ -81,7 +89,7 @@ def build_dataset_test(dataset, num_workers, none_gt=False):
         else:
             raise NotImplementedError(
                 "This repository now supports two datasets: cityscapes and camvid, %s is not included" % dataset)
-        
+
         datas = dataCollect.collectDataAndSave()
         if datas is None:
             print("error while pickling data. Please check.")

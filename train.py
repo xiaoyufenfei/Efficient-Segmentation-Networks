@@ -29,17 +29,14 @@ print(torch_ver)
 
 GLOBAL_SEED = 1234
 
-
-
 def parse_args():
     parser = ArgumentParser(description='Efficient semantic segmentation')
+    parser.add_argument('--gpus', type=str, default="2, 3", help="default GPU devices (2,3)")
+    parser.add_argument('--val_interval', type=int, default=1, help="evaluate and save model interval")
     # model and dataset
-    parser.add_argument('--model', type=str, default="ENet", help="model name: (default ENet)")
-    parser.add_argument('--dataset', type=str, default="camvid", help="dataset: cityscapes or camvid")
-    parser.add_argument('--input_size', type=str, default="360,480", help="input size of model")
-    parser.add_argument('--num_workers', type=int, default=4, help=" the number of parallel threads")
-    parser.add_argument('--classes', type=int, default=11,
-                        help="the number of classes in the dataset. 19 and 11 for cityscapes and camvid, respectively")
+    parser.add_argument('--model', type=str, default="DFANet", help="model name:ESPNet_v2,ESNet  (default ENet)")
+    parser.add_argument('--dataset', type=str, default="cityscapes", help="dataset: cityscapes or camvid")
+    parser.add_argument('--num_workers', type=int, default=8, help=" the number of parallel threads")
     parser.add_argument('--train_type', type=str, default="trainval",
                         help="ontrain for training on train set, ontrainval for training on train+val set")
     # training hyper params
@@ -47,9 +44,10 @@ def parse_args():
                         help="the number of epochs: 300 for train set, 350 for train+val set")
     parser.add_argument('--random_mirror', type=bool, default=True, help="input image random mirror")
     parser.add_argument('--random_scale', type=bool, default=True, help="input image resize 0.5 to 2")
-    parser.add_argument('--lr', type=float, default=5e-4, help="initial learning rate")
-    parser.add_argument('--batch_size', type=int, default=8, help="the batch size is set to 16 for 2 GPUs")
-    parser.add_argument('--optim',type=str.lower,default='adam',choices=['sgd','adam','radam','ranger'],help="select optimizer")
+    parser.add_argument('--lr', type=float, default=2e-3, help="initial learning rate")
+    parser.add_argument('--batch_size', type=int, default=16, help="the batch size is set to 16 for 2 GPUs")
+    # sgd for ESPNet_V2
+    parser.add_argument('--optim',type=str.lower,default='sgd',choices=['sgd','adam','radam','ranger'],help="select optimizer")
     parser.add_argument('--lr_schedule', type=str, default='warmpoly', help='name of lr schedule: poly')
     parser.add_argument('--num_cycles', type=int, default=1, help='Cosine Annealing Cyclic LR')
     parser.add_argument('--poly_exp', type=float, default=0.9,help='polynomial LR exponent')
@@ -58,10 +56,9 @@ def parse_args():
     parser.add_argument('--use_label_smoothing', action='store_true', default=False, help="CrossEntropy2d Loss with label smoothing or not")
     parser.add_argument('--use_ohem', action='store_true', default=False, help='OhemCrossEntropy2d Loss for cityscapes dataset')
     parser.add_argument('--use_lovaszsoftmax', action='store_true', default=False, help='LovaszSoftmax Loss for cityscapes dataset')
-    parser.add_argument('--use_focal', action='store_true', default=False,help=' FocalLoss2d for cityscapes dataset')
+    parser.add_argument('--use_focal', action='store_true', default=True,help=' FocalLoss2d for cityscapes dataset')
     # cuda setting
     parser.add_argument('--cuda', type=bool, default=True, help="running on CPU or GPU")
-    parser.add_argument('--gpus', type=str, default="0", help="default GPU devices (0,1)")
     # checkpoint and log
     parser.add_argument('--resume', type=str, default="",
                         help="use this file to load last checkpoint for continuing training")
@@ -70,8 +67,6 @@ def parse_args():
     args = parser.parse_args()
 
     return args
-
-
 
 def train_model(args):
     """
@@ -90,7 +85,6 @@ def train_model(args):
         if not torch.cuda.is_available():
             raise Exception("No GPU found or Wrong gpu id, please run without --cuda")
 
-
     # set the seed
     setup_seed(GLOBAL_SEED)
     print("=====> set Global Seed: ", GLOBAL_SEED)
@@ -100,9 +94,10 @@ def train_model(args):
 
     # build the model and initialization
     model = build_model(args.model, num_classes=args.classes)
-    init_weight(model, nn.init.kaiming_normal_,
-                nn.BatchNorm2d, 1e-3, 0.1,
-                mode='fan_in')
+    if args.model != "ESPNet_v2":
+        init_weight(model, nn.init.kaiming_normal_,
+                    nn.BatchNorm2d, 1e-3, 0.1,
+                    mode='fan_in')
 
     print("=====> computing network parameters and FLOPs")
     total_paramters = netParams(model)
@@ -114,7 +109,6 @@ def train_model(args):
 
     args.per_iter = len(trainLoader)
     args.max_iter = args.max_epochs * args.per_iter
-
 
     print('=====> Dataset statistics')
     print("data['classWeights']: ", datas['classWeights'])
@@ -211,12 +205,11 @@ def train_model(args):
     print('=====> beginning training')
     for epoch in range(start_epoch, args.max_epochs):
         # training
-
         lossTr, lr = train(args, trainLoader, model, criteria, optimizer, epoch)
         lossTr_list.append(lossTr)
 
-        # validation
-        if epoch % 50 == 0 or epoch == (args.max_epochs - 1):
+        # validation and save
+        if epoch % args.val_interval == 0 or epoch == (args.max_epochs - 1):
             epoches.append(epoch)
             mIOU_val, per_class_iu = val(args, valLoader, model)
             mIOU_val_list.append(mIOU_val)
@@ -227,6 +220,12 @@ def train_model(args):
             print("Epoch No.: %d\tTrain Loss = %.4f\t mIOU(val) = %.4f\t lr= %.6f\n" % (epoch,
                                                                                         lossTr,
                                                                                         mIOU_val, lr))
+            # save the model
+            model_file_name = args.savedir + '/model_' + str(epoch + 1) + '_' + str(round(mIOU_val, 2)) + '.pth'
+            state = {"epoch": epoch + 1, "model": model.state_dict()}
+            # Individual Setting for save model !!!
+            torch.save(state, model_file_name)
+
         else:
             # record train information
             logger.write("\n%d\t\t%.4f\t\t\t\t%.7f" % (epoch, lossTr, lr))
@@ -234,23 +233,8 @@ def train_model(args):
             print("Epoch : " + str(epoch) + ' Details')
             print("Epoch No.: %d\tTrain Loss = %.4f\t lr= %.6f\n" % (epoch, lossTr, lr))
 
-        # save the model
-        model_file_name = args.savedir + '/model_' + str(epoch + 1) + '.pth'
-        state = {"epoch": epoch + 1, "model": model.state_dict()}
-
-        # Individual Setting for save model !!!
-        if args.dataset == 'camvid':
-            torch.save(state, model_file_name)
-        elif args.dataset == 'cityscapes':
-            if epoch >= args.max_epochs - 10:
-                torch.save(state, model_file_name)
-            elif not epoch % 50:
-                torch.save(state, model_file_name)
-
-
-
         # draw plots for visualization
-        if epoch % 50 == 0 or epoch == (args.max_epochs - 1):
+        if epoch % args.val_interval == 0 or epoch == (args.max_epochs - 1):
             # Plot the figures per 50 epochs
             fig1, ax1 = plt.subplots(figsize=(11, 8))
 
@@ -297,7 +281,6 @@ def train(args, train_loader, model, criterion, optimizer, epoch):
     st = time.time()
     for iteration, batch in enumerate(train_loader, 0):
 
-
         args.per_iter = total_batches
         args.max_iter = args.max_epochs * args.per_iter
         args.cur_iter = epoch * args.per_iter + iteration
@@ -332,8 +315,8 @@ def train(args, train_loader, model, criterion, optimizer, epoch):
         epoch_loss.append(loss.item())
         time_taken = time.time() - start_time
 
-
-        print('=====> epoch[%d/%d] iter: (%d/%d) \tcur_lr: %.6f loss: %.3f time:%.2f' % (epoch + 1, args.max_epochs,
+        if iteration % 200 == 0:
+            print('=====> epoch[%d/%d] iter: (%d/%d) \tcur_lr: %.6f loss: %.3f time:%.2f' % (epoch + 1, args.max_epochs,
                                                                                          iteration + 1, total_batches,
                                                                                          lr, loss.item(), time_taken))
 
@@ -367,7 +350,8 @@ def val(args, val_loader, model):
         start_time = time.time()
         output = model(input_var)
         time_taken = time.time() - start_time
-        print("[%d/%d]  time: %.2f" % (i + 1, total_batches, time_taken))
+        if (i % 200==0):
+            print("[%d/%d]  time: %.2f" % (i + 1, total_batches, time_taken))
         output = output.cpu().data[0].numpy()
         gt = np.asarray(label[0].numpy(), dtype=np.uint8)
         output = output.transpose(1, 2, 0)
@@ -377,23 +361,26 @@ def val(args, val_loader, model):
     meanIoU, per_class_iu = get_iou(data_list, args.classes)
     return meanIoU, per_class_iu
 
-
-
 if __name__ == '__main__':
     start = timeit.default_timer()
     args = parse_args()
 
     if args.dataset == 'cityscapes':
         args.classes = 19
-        args.input_size = '512,1024'
+        # args.input_size = '512,1024'
+        args.input_size = '416,832'
         ignore_label = 255
     elif args.dataset == 'camvid':
         args.classes = 11
         args.input_size = '360,480'
         ignore_label = 11
+    elif args.dataset == 'ade20k':
+        args.classes = 150
+        args.input_size = '480,480'
+        ignore_label = 255
     else:
         raise NotImplementedError(
-            "This repository now supports two datasets: cityscapes and camvid, %s is not included" % args.dataset)
+            "This repository now supports three datasets: cityscapes, camvid and ade20k %s is not included" % args.dataset)
 
     train_model(args)
     end = timeit.default_timer()
