@@ -65,7 +65,7 @@ def build_dataset_train(dataset, input_size, batch_size, train_type, random_scal
 
 def build_dataset_test(dataset, num_workers, none_gt=False):
     data_dir = os.path.join('./dataset/', dataset)
-    dataset_list = os.path.join(dataset, '_trainval_list.txt')
+    dataset_list = dataset + '_trainval_list.txt'
     test_data_list = os.path.join(data_dir, dataset + '_test' + '_list.txt')
     inform_data_file = os.path.join('./dataset/inform/', dataset + '_inform.pkl')
 
