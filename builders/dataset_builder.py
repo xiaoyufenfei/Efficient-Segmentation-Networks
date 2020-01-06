@@ -7,7 +7,7 @@ from dataset.camvid import CamVidDataSet, CamVidValDataSet, CamVidTrainInform, C
 
 def build_dataset_train(dataset, input_size, batch_size, train_type, random_scale, random_mirror, num_workers):
     data_dir = os.path.join('./dataset/', dataset)
-    dataset_list = os.path.join(dataset, '_trainval_list.txt')
+    dataset_list = dataset + '_trainval_list.txt'
     train_data_list = os.path.join(data_dir, dataset + '_' + train_type + '_list.txt')
     val_data_list = os.path.join(data_dir, dataset + '_val' + '_list.txt')
     inform_data_file = os.path.join('./dataset/inform/', dataset + '_inform.pkl')
@@ -43,7 +43,7 @@ def build_dataset_train(dataset, input_size, batch_size, train_type, random_scal
 
         valLoader = data.DataLoader(
             CityscapesValDataSet(data_dir, val_data_list, f_scale=1, mean=datas['mean']),
-            batch_size=1, shuffle=True, num_workers=num_workers, pin_memory=True,
+            batch_size=batch_size, shuffle=True, num_workers=num_workers, pin_memory=True,
             drop_last=True)
 
         return datas, trainLoader, valLoader
@@ -58,7 +58,7 @@ def build_dataset_train(dataset, input_size, batch_size, train_type, random_scal
 
         valLoader = data.DataLoader(
             CamVidValDataSet(data_dir, val_data_list, f_scale=1, mean=datas['mean']),
-            batch_size=1, shuffle=True, num_workers=num_workers, pin_memory=True)
+            batch_size=batch_size, shuffle=True, num_workers=num_workers, pin_memory=True)
 
         return datas, trainLoader, valLoader
 
