@@ -1,4 +1,4 @@
-import os
+import os,sys
 import time
 import torch
 from torch import optim
@@ -21,6 +21,8 @@ from utils.losses.loss import LovaszSoftmax, CrossEntropyLoss2d, CrossEntropyLos
 from utils.optim import RAdam, Ranger, AdamW
 from utils.scheduler.lr_scheduler import WarmupPolyLR
 
+
+sys.setrecursionlimit(1000000)  # solve problem 'maximum recursion depth exceeded'
 
 torch_ver = torch.__version__[:3]
 if torch_ver == '0.3':
